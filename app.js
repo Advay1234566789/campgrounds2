@@ -29,7 +29,10 @@ const campgrounds = require('./routes/campground');
 const reviews = require('./routes/review');
 
 mongoose.connect(dbUrl, {
-   
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 
