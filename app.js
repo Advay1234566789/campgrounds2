@@ -31,8 +31,7 @@ const reviews = require('./routes/review');
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+   
 });
 
 
@@ -56,7 +55,7 @@ app.use(mongoSanitize());
 
 
 const store = new MongoStore({
-url:'mongodb://localhost:27017/yelpcamp',
+url:dbUrl,
 secret : 'lol',
 touchAfter: 24*60*60
 })
@@ -98,11 +97,7 @@ app.use((req, res, next) => {
 
 
 
-app.get('/fakeUser' , async (req ,res)=>{
-    const user = new User({ email : 'advay@gmail.com' , username : 'advay'});
-    const newUser = await User.register(user, 'password');
-    res.send(newUser);
-})
+
 
 app.use('/',userRoutes)
 app.use('/campgrounds', campgrounds)
